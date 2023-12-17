@@ -139,7 +139,7 @@ class AddingAlarm : AppCompatActivity() {
         val buttonSelectMusic = findViewById<Button>(R.id.button_select_music)
         buttonSelectMusic.text = ringtoneName
     }
-    private fun getAlarmInfoPendingIntent(): PendingIntent {
+    fun getAlarmInfoPendingIntent(): PendingIntent {
         // Получаем PendingIntent для отображения информации о будильнике
         val alarmInfoIntent = Intent(this, BlankFragmentAlarm::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
