@@ -72,6 +72,8 @@ class AddingAlarm : AppCompatActivity() {
             true // Включает 24-часовой формат времени
         )
         timePickerDialog.show()
+        // В методе showTimePicker(), после установки времени в Calendar
+        findViewById<Button>(R.id.button_select_time).text = String.format("%02d:%02d", selectedCalendar.get(Calendar.HOUR_OF_DAY), selectedCalendar.get(Calendar.MINUTE))
     }
 
     private fun save() {
@@ -123,10 +125,14 @@ class AddingAlarm : AppCompatActivity() {
     }
 
     private fun saveRingtone(uri: Uri) {
+        val ringtone = RingtoneManager.getRingtone(this, uri)
+        val ringtoneName = ringtone.getTitle(this)
         getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             .edit()
             .putString(PREF_SELECTED_RINGTONE, uri.toString())
             .apply()
+        val buttonSelectMusic = findViewById<Button>(R.id.button_select_music)
+        buttonSelectMusic.text = ringtoneName
     }
     private fun getAlarmInfoPendingIntent(): PendingIntent {
         // Получаем PendingIntent для отображения информации о будильнике
