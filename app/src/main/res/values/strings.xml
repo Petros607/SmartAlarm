@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SmartAlarm</string>
+    <string name="title_alarm">Будильник</string>
+    <string name="title_timer">Таймер</string>
+    <string name="title_stopwatch">Секундомер</string>
+    <string name="title_settings">Настройки</string>
+    <string name="enter_your_answer">Enter your answer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_adding_alarm">AddingAlarm</string>
+</resources>

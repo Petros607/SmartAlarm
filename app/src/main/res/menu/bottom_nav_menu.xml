@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigationAlarm"
+        android:icon="@drawable/baseline_alarm_24"
+        android:iconTint="#121212"
+        android:title="@string/title_alarm" />
+
+    <item
+        android:id="@+id/navigationTimer"
+        android:icon="@drawable/baseline_punch_clock_24"
+        android:iconTint="#121212"
+        android:title="@string/title_timer" />
+
+    <item
+        android:id="@+id/navigationStopwatch"
+        android:icon="@drawable/baseline_timer_24"
+        android:iconTint="#121212"
+        android:title="@string/title_stopwatch" />
+
+    <item
+        android:id="@+id/navigationSettings"
+        android:icon="@drawable/baseline_settings_24"
+        android:iconTint="#121212"
+        android:title="@string/title_settings" />
+
+</menu>
