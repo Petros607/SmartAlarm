@@ -40,6 +40,7 @@ class AddingAlarm : AppCompatActivity() {
         val buttonSelectTime = findViewById<Button>(R.id.button_select_time)
         val buttonSelectMusic = findViewById<Button>(R.id.button_select_music)
         val saveButton = findViewById<Button>(R.id.button_save)
+        val buttonCancel = findViewById<Button>(R.id.button_cancel)
 
         // Инициализация Calendar
         selectedCalendar = Calendar.getInstance()
@@ -55,6 +56,9 @@ class AddingAlarm : AppCompatActivity() {
         // Обработчик нажатия для сохранения
         saveButton.setOnClickListener {
             save()
+        }
+        buttonCancel.setOnClickListener {
+            cancel()
         }
     }
 
@@ -116,6 +120,7 @@ class AddingAlarm : AppCompatActivity() {
         startActivityForResult(intent, REQUEST_RINGTONE)
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_RINGTONE && resultCode == RESULT_OK) {
@@ -158,6 +163,10 @@ class AddingAlarm : AppCompatActivity() {
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )
+    }
+
+    private fun cancel(){
+        finish()
     }
 }
 
