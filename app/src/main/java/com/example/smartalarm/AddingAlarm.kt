@@ -7,13 +7,17 @@ import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import java.util.Calendar
+
 
 data class Alarm(
     val name: String,
@@ -83,27 +87,43 @@ class AddingAlarm : AppCompatActivity() {
     }
 
     private fun save() {
+        val text = "Пора покормить кота!"
+        val duration = Toast.LENGTH_SHORT
+
+        val toast = Toast.makeText(applicationContext, text, duration)
         val textToSave = editText.text.toString()
+        toast.show()
+
 
         val alarm = Alarm(
             name = textToSave,
             ringtoneUri = getSavedRingtone().toString(),
             timeInMillis = selectedCalendar.timeInMillis
         )
+
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val alarmClockInfo = AlarmManager.AlarmClockInfo(
             selectedCalendar.timeInMillis,
             getAlarmInfoPendingIntent()
         )
-        alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
-        val alarmJson = Gson().toJson(alarm)
 
-        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-            .edit()
-            .putString(PREF_SELECTED_ALARM, alarmJson)
-            .apply()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 
-        finish()
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
+                    val alarmJson = Gson().toJson(alarm)
+
+                    getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit()
+                        .putString(PREF_SELECTED_ALARM, alarmJson)
+                        .apply()
+
+                    finish()
+                } else {
+                    toast.show()
+            }
+        }
+
     }
 
     private fun getSavedRingtone(): Uri? {
@@ -150,7 +170,7 @@ class AddingAlarm : AppCompatActivity() {
             this,
             0,
             alarmInfoIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
     }
 
@@ -163,7 +183,7 @@ class AddingAlarm : AppCompatActivity() {
             this,
             1,
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
     }
 

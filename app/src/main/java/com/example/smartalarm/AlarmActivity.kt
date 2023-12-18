@@ -113,7 +113,7 @@ class AlarmActivity : AppCompatActivity() {
                 newTimeMillis,
                 alarmInfoPendingIntent
             )
-            alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
+            //alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
 
             // Останавливаем звучание текущего будильника
             stopAlarm()
