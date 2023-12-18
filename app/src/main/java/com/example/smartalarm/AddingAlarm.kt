@@ -75,6 +75,9 @@ class AddingAlarm : AppCompatActivity() {
                 // Установка выбранного времени в Calendar
                 selectedCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 selectedCalendar.set(Calendar.MINUTE, minute)
+
+                findViewById<Button>(R.id.button_select_time).text = String.format("%02d:%02d", selectedCalendar.get(Calendar.HOUR_OF_DAY), selectedCalendar.get(Calendar.MINUTE))
+
             },
             selectedCalendar.get(Calendar.HOUR_OF_DAY),
             selectedCalendar.get(Calendar.MINUTE),
@@ -82,7 +85,6 @@ class AddingAlarm : AppCompatActivity() {
         )
         timePickerDialog.show()
         // В методе showTimePicker(), после установки времени в Calendar
-        findViewById<Button>(R.id.button_select_time).text = String.format("%02d:%02d", selectedCalendar.get(Calendar.HOUR_OF_DAY), selectedCalendar.get(Calendar.MINUTE))
     }
 
     private fun save() {
@@ -90,9 +92,10 @@ class AddingAlarm : AppCompatActivity() {
         val duration = Toast.LENGTH_SHORT
 
         val toast = Toast.makeText(applicationContext, text, duration)
-//
 
-        val textToSave = editText.text.toString()
+        var textToSave = editText.text.toString()
+        if (editText.text.toString() == "") {textToSave = "Просыпайся"}
+
 
 
         val alarm = Alarm(
