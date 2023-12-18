@@ -27,6 +27,9 @@ class AlarmActivity : AppCompatActivity() {
         val buttonAlarmOff = findViewById<Button>(R.id.buttonAlarmOff)
         val buttonAlarmOff2 = findViewById<Button>(R.id.buttonAlarmOff2)
         val buttonMin5 = findViewById<ImageButton>(R.id.button_min5)
+        val actionBar = supportActionBar
+        actionBar?.hide()
+
 
         val prefs = getSharedPreferences(AddingAlarm.PREFS_NAME, Context.MODE_PRIVATE)
         val alarmJson = prefs.getString(AddingAlarm.PREF_SELECTED_ALARM, null)

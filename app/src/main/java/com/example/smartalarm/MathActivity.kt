@@ -13,6 +13,8 @@ class MathActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_math)
+        val actionBar = supportActionBar
+        actionBar?.title = "Реши задачки"
         val editText2 = findViewById<EditText>(R.id.editTextNumberDecimal2)
         val editText3 = findViewById<EditText>(R.id.editTextNumberDecimal3)
         val editText4 = findViewById<EditText>(R.id.editTextNumberDecimal4)
@@ -51,13 +53,12 @@ class MathActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                val inputValue = s.toString().toInt()
+                if (s != null && s.toString().toInt() == answer) {
+                    val inputValue = s.toString().toInt()
 
-                if (inputValue != null && inputValue == answer) {
-                    // Введено число 100, меняем цвет текста на зеленый
                     textView.setTextColor(Color.GREEN)
-                } else if(inputValue != null) {
-                    // Введено не число 100, восстанавливаем цвет текста по умолчанию
+                } else if(s != null) {
+
                     textView.setTextColor(Color.RED) // Или установите цвет, который вам нужен по умолчанию
                 }
                 if (list.all { it.currentTextColor == Color.GREEN }) {
