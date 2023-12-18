@@ -9,7 +9,6 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TimePicker
@@ -87,12 +86,13 @@ class AddingAlarm : AppCompatActivity() {
     }
 
     private fun save() {
-        val text = "Пора покормить кота!"
+        val text = "Ошибка!"
         val duration = Toast.LENGTH_SHORT
 
         val toast = Toast.makeText(applicationContext, text, duration)
+//
+
         val textToSave = editText.text.toString()
-        toast.show()
 
 
         val alarm = Alarm(
@@ -106,8 +106,7 @@ class AddingAlarm : AppCompatActivity() {
             selectedCalendar.timeInMillis,
             getAlarmInfoPendingIntent()
         )
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
 
                 if (alarmManager.canScheduleExactAlarms()) {
                     alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())

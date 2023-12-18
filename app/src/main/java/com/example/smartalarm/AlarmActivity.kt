@@ -8,11 +8,13 @@ import android.content.SharedPreferences
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartalarm.AddingAlarm
 import com.google.gson.Gson
@@ -104,7 +106,7 @@ class AlarmActivity : AppCompatActivity() {
                 this,
                 0,
                 alarmInfoIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_IMMUTABLE
             )
 
             // Устанавливаем новое время для будильника с использованием PendingIntent
@@ -113,7 +115,26 @@ class AlarmActivity : AppCompatActivity() {
                 newTimeMillis,
                 alarmInfoPendingIntent
             )
-            //alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
+            val text = "Ошибка!"
+            val duration = Toast.LENGTH_SHORT
+
+            val toast = Toast.makeText(applicationContext, text, duration)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+
+                if (alarmManager.canScheduleExactAlarms()) {
+                    alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
+                    val alarmJson = Gson().toJson(alarm)
+
+                    getSharedPreferences(AddingAlarm.PREFS_NAME, MODE_PRIVATE)
+                        .edit()
+                        .putString(AddingAlarm.PREF_SELECTED_ALARM, alarmJson)
+                        .apply()
+
+                    finish()
+                } else {
+                    toast.show()
+                }
+            }
 
             // Останавливаем звучание текущего будильника
             stopAlarm()
@@ -131,7 +152,7 @@ class AlarmActivity : AppCompatActivity() {
                 this,
                 1,
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_IMMUTABLE
             )
         }
 }
