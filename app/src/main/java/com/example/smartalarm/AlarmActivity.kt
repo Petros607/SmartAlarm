@@ -10,6 +10,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -22,6 +23,18 @@ import com.google.gson.Gson
 class AlarmActivity : AppCompatActivity() {
     private var ringtone: Ringtone? = null
 
+    private val handler = Handler()
+    private val checkRingtoneRunnable = object : Runnable {
+        override fun run() {
+            checkRingtonePlaying()
+            handler.postDelayed(this, 2000) // Повторить через определенный интервал
+        }
+    }
+    private fun checkRingtonePlaying() {
+        if (ringtone?.isPlaying == false) {
+            ringtone?.play()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
@@ -59,6 +72,7 @@ class AlarmActivity : AppCompatActivity() {
 
             // Воспроизведение рингтона
             ringtone?.play()
+            handler.postDelayed(checkRingtoneRunnable, 2000)
         }
 
         // Загрузка данных о будильнике
@@ -67,7 +81,9 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun stopAlarm() {
         if (ringtone != null && ringtone!!.isPlaying) {
+            handler.removeCallbacks(checkRingtoneRunnable)
             ringtone!!.stop()
+
         }
 
         finish()

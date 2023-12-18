@@ -110,7 +110,6 @@ class AddingAlarm : AppCompatActivity() {
             getAlarmInfoPendingIntent()
         )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-
                 if (alarmManager.canScheduleExactAlarms()) {
                     alarmManager.setAlarmClock(alarmClockInfo, getAlarmActionPendingIntent())
                     val alarmJson = Gson().toJson(alarm)
