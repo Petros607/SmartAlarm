@@ -37,7 +37,7 @@ class AddingAlarm : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_adding_alarm)
+        setContentView(R.layout.adding_alarm)
 
         editText = findViewById(R.id.userValue)
         val buttonSelectTime = findViewById<Button>(R.id.button_select_time)
