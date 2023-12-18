@@ -41,6 +41,8 @@ class AddingAlarm : AppCompatActivity() {
         val buttonSelectMusic = findViewById<Button>(R.id.button_select_music)
         val saveButton = findViewById<Button>(R.id.button_save)
         val buttonCancel = findViewById<Button>(R.id.button_cancel)
+        val actionBar = supportActionBar
+        actionBar?.title = "Установка будильника"
 
         // Инициализация Calendar
         selectedCalendar = Calendar.getInstance()
