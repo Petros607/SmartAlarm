@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Vibrator
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
@@ -18,15 +19,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smartalarm.AddingAlarm
+import android.os.VibrationEffect
 import com.google.gson.Gson
 
 class AlarmActivity : AppCompatActivity() {
     private var ringtone: Ringtone? = null
+    private lateinit var vibrator: Vibrator
 
     private val handler = Handler()
     private val checkRingtoneRunnable = object : Runnable {
         override fun run() {
             checkRingtonePlaying()
+            startVibration()
             handler.postDelayed(this, 2000) // Повторить через определенный интервал
         }
     }
@@ -39,17 +43,21 @@ class AlarmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
 
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
         val buttonAlarmOff = findViewById<Button>(R.id.buttonAlarmOff)
         val buttonAlarmOff2 = findViewById<Button>(R.id.buttonAlarmOff2)
         val buttonMin5 = findViewById<ImageButton>(R.id.button_min5)
         val actionBar = supportActionBar
         actionBar?.hide()
+        startVibration()
 
 
         val prefs = getSharedPreferences(AddingAlarm.PREFS_NAME, Context.MODE_PRIVATE)
         val alarmJson = prefs.getString(AddingAlarm.PREF_SELECTED_ALARM, null)
         buttonMin5.setOnClickListener {
             transfer(alarmJson)
+
         }
         buttonAlarmOff.setOnClickListener {
             val intent = Intent(this, MathActivity::class.java)
@@ -85,10 +93,20 @@ class AlarmActivity : AppCompatActivity() {
             ringtone!!.stop()
 
         }
+        vibrator.cancel()
 
         finish()
     }
 
+    private fun startVibration() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val vibrationEffect = VibrationEffect.createWaveform(longArrayOf(1000, 500, 1000), -1)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            // Для более старых устройств
+            vibrator.vibrate(1000)
+        }
+    }
     private fun getSavedRingtone(): Uri? {
         val prefs = getSharedPreferences(AddingAlarm.PREFS_NAME, Context.MODE_PRIVATE)
         val savedRingtone = prefs.getString(AddingAlarm.PREF_SELECTED_RINGTONE, null)
@@ -110,6 +128,7 @@ class AlarmActivity : AppCompatActivity() {
         if (alarmJson != null) {
             // Если есть сохраненные данные о будильнике, загрузим их
             val alarm = Gson().fromJson(alarmJson, Alarm::class.java)
+            vibrator.cancel()
 
             // Увеличиваем время на 5 минут
             val newTimeMillis = alarm.timeInMillis + 5 * 60 * 1000 // 5 минут в миллисекундах

@@ -1,5 +1,6 @@
 package com.example.smartalarm
 
+import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.TimePickerDialog
@@ -96,8 +97,6 @@ class AddingAlarm : AppCompatActivity() {
         var textToSave = editText.text.toString()
         if (editText.text.toString() == "") {textToSave = "Просыпайся"}
 
-
-
         val alarm = Alarm(
             name = textToSave,
             ringtoneUri = getSavedRingtone().toString(),
@@ -119,8 +118,14 @@ class AddingAlarm : AppCompatActivity() {
                         .putString(PREF_SELECTED_ALARM, alarmJson)
                         .apply()
 
+                    val resultIntent = Intent()
+                    resultIntent.putExtra("data", alarmJson)
+                    setResult(Activity.RESULT_OK, resultIntent)
+
                     finish()
                 } else {
+                    val resultIntent = Intent()
+                    setResult(Activity.RESULT_CANCELED, resultIntent)
                     toast.show()
             }
         }
