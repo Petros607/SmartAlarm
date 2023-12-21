@@ -7,9 +7,10 @@
 
     <fragment
         android:id="@+id/navigationAlarm"
-        android:name="com.example.smartalarm.BlankFragmentAlarm"
         android:label="@string/title_alarm"
+        android:name="com.example.smartalarm.Guide.Model.AlarmList.AlarmListFragment"
         tools:layout="@layout/fragment_blank_alarm" />
+<!--        android:name="com.example.smartalarm.BlankFragmentAlarm"-->
 
     <fragment
         android:id="@+id/navigationTimer"
