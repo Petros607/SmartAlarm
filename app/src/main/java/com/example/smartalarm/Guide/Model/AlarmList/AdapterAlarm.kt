@@ -1,24 +1,45 @@
 package com.example.smartalarm.Guide.Model.AlarmList
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smartalarm.Guide.Model.Alarm
 import com.example.smartalarm.databinding.ItemalarmBinding
 import com.example.smartalarm.Guide.Model.AlarmList.OnToggleListener
-class AdapterAlarm(var onToggleL: OnToggleListener) : RecyclerView.Adapter<AdapterAlarm.AlarmViewHolder>(){
+class AdapterAlarm : RecyclerView.Adapter<AdapterAlarm.AlarmViewHolder>(){
 
     private var mList = ArrayList<Alarm>()
+    private var OnToggleListener: OnToggleListener? = null
+    private var onClickAlarmListener: OnClickAlarmListener?= null
+    inner class AlarmViewHolder(var binding: ItemalarmBinding):
+        RecyclerView.ViewHolder(binding.root),
+            View.OnClickListener,
+            View.OnLongClickListener
+    {
+        init {
+            binding.root.setOnClickListener(this)
+            binding.root.setOnLongClickListener(this)
+        }
 
-    inner class AlarmViewHolder(var binding: ItemalarmBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(alarm: Alarm) {
             binding.txtTime.text = alarm.getTime()
+            binding.txtName.text = alarm.getAlarmTxtName()
             binding.swStart.isChecked = alarm.start
             binding.swStart.setOnCheckedChangeListener{
                 btnView,isCheck ->
                 alarm.start = isCheck
-                onToggleL.onToggle(alarm)
+                OnToggleListener?.onToggle(alarm)
             }
+        }
+
+        override fun onClick(v: View?) {
+            onClickAlarmListener?.onClick(mList.get(adapterPosition))
+        }
+
+        override fun onLongClick(v: View?): Boolean {
+            onClickAlarmListener?.onLongClick(mList.get(adapterPosition))
+            return true
         }
     }
 
@@ -37,6 +58,17 @@ class AdapterAlarm(var onToggleL: OnToggleListener) : RecyclerView.Adapter<Adapt
     fun setData(it: List<Alarm>?) {
         mList = it as ArrayList<Alarm>
         notifyDataSetChanged()
+    }
 
+    fun setName(it: List<Alarm>?) {
+        mList = it as ArrayList<Alarm>
+    }
+
+    fun addOnToggleListener(onToggleListener: OnToggleListener) {
+        this.OnToggleListener = onToggleListener
+    }
+
+    fun addOnClickAlarmListener(onClickAlarmListener: OnClickAlarmListener) {
+        this.onClickAlarmListener = onClickAlarmListener
     }
 }

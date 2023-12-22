@@ -1,5 +1,6 @@
 package com.example.smartalarm.Guide.Model.AlarmList
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -18,7 +19,7 @@ import com.example.smartalarm.R
 import com.example.smartalarm.databinding.FragmentAlarmListBinding
 
 
-class AlarmListFragment : Fragment(), OnToggleListener {
+class AlarmListFragment : Fragment(), OnToggleListener, OnClickAlarmListener {
 
     private lateinit var binding: FragmentAlarmListBinding
     private lateinit var adapter: AdapterAlarm
@@ -39,7 +40,9 @@ class AlarmListFragment : Fragment(), OnToggleListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[AlarmViewModel::class.java]
 
-        adapter = AdapterAlarm(this)
+        adapter = AdapterAlarm()
+        adapter.addOnToggleListener(this)
+        adapter.addOnClickAlarmListener(this)
         viewModel.list.observe(viewLifecycleOwner, Observer { adapter.setData(it) })
 
 
@@ -58,5 +61,23 @@ class AlarmListFragment : Fragment(), OnToggleListener {
         } else {
             alarm.cancel(requireContext())
         }
+    }
+
+    override fun onClick(alarm: Alarm) {
+
+    }
+
+    override fun onLongClick(alarm: Alarm) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Удаление будильника")
+            .setMessage("Вы точно хотите удалить будильник?")
+            .setNegativeButton("Нет((") { dialog, which -> dialog.dismiss()}
+            .setPositiveButton("Конечно") {dialog, which ->
+                if (alarm.start) {
+                    alarm.cancel(requireContext())
+                }
+                viewModel.delete(alarm)
+            }
+        dialog.show()
     }
 }

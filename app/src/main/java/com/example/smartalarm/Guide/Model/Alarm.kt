@@ -19,18 +19,27 @@ data class Alarm(
     @ColumnInfo var hour : Int,
     @ColumnInfo var minute : Int,
     @ColumnInfo var start : Boolean,
-    @ColumnInfo var fri : Boolean
+    @ColumnInfo var fri : Boolean,
+    @ColumnInfo var name : String
 ) {
     constructor(id: Long, hour: Int, minute: Int): this (
-        id, hour, minute, start = false, true
+        id, hour, minute, start = false, true, "Будильник"
+    )
+
+    constructor(id: Long, hour: Int, minute: Int, name: String): this (
+        id, hour, minute, start = false, true, name = name
     )
 
     constructor(): this (
-        Random().nextLong(), 0, 0, false, true
+        Random().nextLong(), 0, 0, false, true, "Будильник"
     )
 
     fun getTime(): String {
         return "$hour:$minute"
+    }
+
+    fun getAlarmTxtName(): String {
+        return name
     }
 
     fun getRepeat(): String {
