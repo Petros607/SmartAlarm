@@ -1,17 +1,15 @@
 package com.example.smartalarm.Guide.Model.BroadCastReceiver
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Build
 import android.util.Log
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import com.example.smartalarm.Guide.Model.Alarm
 import com.example.smartalarm.Guide.Model.Service.AlarmService
-import com.example.smartalarm.Guide.Model.Service.AlarmWorker
 import java.util.Calendar
+
 
 class AlarmBroadCastReceiver : BroadcastReceiver() {
     companion object {
@@ -21,7 +19,15 @@ class AlarmBroadCastReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
+        val intent = intent
         val intentService = Intent(context, AlarmService::class.java)
+        //val intent = getIntent()
+        //val ringtoneUriString = intent?.getStringExtra("ALARM")
+        //intentService.putExtra("ALARM", ringtoneUriString)
+        val alarm = intent?.getParcelableExtra<Alarm>("ALARM")
+        intentService.putExtra("ALARM", alarm)
+
+
         //if (!intent?.getBooleanExtra(RECURRING, false)!!) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context?.startForegroundService(intentService)

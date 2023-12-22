@@ -4,45 +4,53 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.example.smartalarm.Guide.Model.Alarm
 import com.example.smartalarm.Guide.Model.AlarmActivity
 import com.example.smartalarm.Guide.Model.Application.App
 import com.example.smartalarm.R
+import android.os.VibrationEffect
+import android.os.Vibrator
 
 class AlarmService: Service() {
+    //private val audioController = AudioController()
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val intent2 = intent
+        val alarm = intent2?.getParcelableExtra<Alarm>("ALARM")
+
         val intent = Intent(this, AlarmActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
         val notification = NotificationCompat.Builder(this, App.ID)
             .setSmallIcon(R.drawable.baseline_alarm_24)
-            .setContentTitle("Заголовок")
-            .setContentText("Текст")
+            .setContentTitle(alarm?.name)
+            .setContentText("Просыпайся, дорогой")
             .setContentIntent(pendingIntent)
             .build()
+
+        startActivity(intent)
+
         startForeground(1, notification)
+
+        (application as App).vibrationController.startVibration(applicationContext)
+
+
+        //val ringtoneUriString = intent2?.getStringExtra("ALARM")
+        val ringtoneUriString = alarm?.ringtoneUri
+        (application as App).audioController.startAudio(applicationContext, ringtoneUriString)
+        intent.putExtra("ALARM", alarm)
         return START_STICKY
     }
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
-}
-class AlarmWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
-    override fun doWork(): Result {
-        val intent = Intent(applicationContext, AlarmActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        val notification = NotificationCompat.Builder(applicationContext, App.ID)
-            .setSmallIcon(R.drawable.baseline_alarm_24)
-            .setContentTitle("Заголовок")
-            .setContentText("Текст")
-            .setContentIntent(pendingIntent)
-            .build()
-
-        // Здесь вы можете использовать вашу службу для установки уведомления в качестве фонового сервиса
-        // Ваша служба может быть удалена, если она не используется
-        return Result.success()
-    }
 }

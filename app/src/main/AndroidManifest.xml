@@ -35,7 +35,8 @@
             </intent-filter>
         </activity>
         <receiver android:name=".Guide.Model.BroadCastReceiver.AlarmBroadCastReceiver"/>
-        <activity android:name=".Guide.Model.AlarmActivity"/>
+        <activity android:name=".Guide.Model.AlarmActivity"
+            android:launchMode="singleTask"/>
         <service android:name=".Guide.Model.Service.AlarmService"/>
 
 

@@ -4,34 +4,42 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
+import android.media.RingtoneManager.*
+import android.net.Uri
 import android.os.Build
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.smartalarm.Guide.Model.BroadCastReceiver.AlarmBroadCastReceiver
+import com.example.smartalarm.Guide.Model.Service.AlarmService
 import java.lang.StringBuilder
 import java.util.Calendar
 import java.util.Random
+import kotlinx.parcelize.Parcelize
 
 @Entity
+@Parcelize
 data class Alarm(
     @PrimaryKey(autoGenerate = true) val uid : Long?,
     @ColumnInfo var hour : Int,
     @ColumnInfo var minute : Int,
     @ColumnInfo var start : Boolean,
     @ColumnInfo var fri : Boolean,
-    @ColumnInfo var name : String
-) {
+    @ColumnInfo var name : String,
+    @ColumnInfo var ringtoneUri: String
+) : Parcelable {
     constructor(id: Long, hour: Int, minute: Int): this (
-        id, hour, minute, start = false, true, "Будильник"
+        id, hour, minute, start = false, true, "Будильник", RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI
     )
 
-    constructor(id: Long, hour: Int, minute: Int, name: String): this (
-        id, hour, minute, start = false, true, name = name
+    constructor(id: Long, hour: Int, minute: Int, name: String, ringtoneUri: String): this (
+        id, hour, minute, start = false, true, name = name, ringtoneUri
     )
 
     constructor(): this (
-        Random().nextLong(), 0, 0, false, true, "Будильник"
+        Random().nextLong(), 0, 0, false, true, "Будильник", RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI
     )
 
     fun getTime(): String {
@@ -57,6 +65,10 @@ data class Alarm(
 
         intent.putExtra(AlarmBroadCastReceiver.FRIDAY, fri)
         intent.putExtra(AlarmBroadCastReceiver.RECURRING, isLoop())
+
+        //val intentService = Intent(context, AlarmService::class.java)
+        //intent.putExtra("ALARM", this.ringtoneUri)
+        intent.putExtra("ALARM", this)
 
         val pendingIntent = PendingIntent.getBroadcast(context,uid?.toInt()!!,intent, PendingIntent.FLAG_IMMUTABLE)
 
