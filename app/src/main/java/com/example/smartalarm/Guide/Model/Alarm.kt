@@ -5,19 +5,15 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
-import android.media.RingtoneManager.*
-import android.net.Uri
 import android.os.Build
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.smartalarm.Guide.Model.BroadCastReceiver.AlarmBroadCastReceiver
-import com.example.smartalarm.Guide.Model.Service.AlarmService
-import java.lang.StringBuilder
+import kotlinx.parcelize.Parcelize
 import java.util.Calendar
 import java.util.Random
-import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
@@ -43,7 +39,8 @@ data class Alarm(
     )
 
     fun getTime(): String {
-        return "$hour:$minute"
+//        return "$hour:$minute"
+        return String.format("%02d:%02d", hour, minute)
     }
 
     fun getAlarmTxtName(): String {
