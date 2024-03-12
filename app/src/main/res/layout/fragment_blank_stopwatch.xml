@@ -8,6 +8,29 @@
     android:orientation="vertical"
     tools:context=".BlankFragmentStopwatch">
 
+    <cn.iwgang.countdownview.CountdownView
+        android:id="@+id/cv_countdownViewTest1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:isHideTimeBackground="true"
+        app:isShowMinute="true"
+        app:isShowSecond="true"
+        app:isTimeTextBold="true"
+        app:isShowMillisecond="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13"
+        app:suffixGravity="bottom"
+        app:suffixMinute=":"
+        app:suffixSecond=","
+        app:suffixTextColor="#000000"
+        app:suffixTextSize="20sp"
+        app:timeTextColor="#000000"
+        app:timeTextSize="28sp" />
+
     <Chronometer
         android:id="@+id/chronometer"
         android:layout_width="167dp"
@@ -53,4 +76,114 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pause_button" />
 
+    <com.example.smartalarm.commons.MyTextView
+        android:id="@+id/stopwatch_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/small_margin"
+        android:textSize="@dimen/stopwatch_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="00.00" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/stopwatch_sorting_indicators_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/stopwatch_time">
+
+        <ImageView
+            android:id="@+id/stopwatch_sorting_indicator_1"
+            android:layout_width="@dimen/lap_time_size"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/stopwatch_sorting_indicator_2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/stopwatch_sorting_indicator_2"
+            android:layout_width="@dimen/lap_time_size"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toStartOf="@+id/stopwatch_sorting_indicator_3"
+            app:layout_constraintStart_toEndOf="@+id/stopwatch_sorting_indicator_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/stopwatch_sorting_indicator_3"
+            android:layout_width="@dimen/lap_time_size"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/stopwatch_sorting_indicator_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.example.smartalarm.commons.MyRecyclerView
+        android:id="@+id/stopwatch_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:clipToPadding="false"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbars="vertical"
+        app:layoutManager="com.simplemobiletools.commons.views.MyLinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/stopwatch_play_pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stopwatch_sorting_indicators_holder" />
+
+    <ImageView
+        android:id="@+id/stopwatch_play_pause"
+        android:layout_width="@dimen/stopwatch_button_size"
+        android:layout_height="@dimen/stopwatch_button_size"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/big_margin"
+        android:padding="@dimen/activity_margin"
+        android:src="@drawable/ic_play_vector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/stopwatch_reset"
+        android:layout_width="@dimen/stopwatch_button_small_size"
+        android:layout_height="@dimen/stopwatch_button_small_size"
+        android:layout_toStartOf="@+id/stopwatch_play_pause"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/normal_margin"
+        android:src="@drawable/ic_reset_vector"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/stopwatch_play_pause"
+        app:layout_constraintEnd_toStartOf="@+id/stopwatch_play_pause"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/stopwatch_play_pause" />
+
+    <com.example.smartalarm.commons.MyTextView
+        android:id="@+id/stopwatch_lap"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/stopwatch_button_small_size"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:gravity="center"
+        android:letterSpacing="0.1"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:text="lap"
+        android:textAllCaps="true"
+        android:textSize="@dimen/bigger_text_size"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/stopwatch_play_pause"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stopwatch_play_pause"
+        app:layout_constraintTop_toTopOf="@+id/stopwatch_play_pause" />
 </androidx.constraintlayout.widget.ConstraintLayout>
