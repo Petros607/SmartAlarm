@@ -5,14 +5,6 @@ plugins {
     id("kotlin-parcelize")
 }
 
-//allprojects {
-//    configurations.all {
-//        resolutionStrategy {
-//            force ("org.xerial:sqlite-jdbc:3.34.0")
-//        }
-//    }
-//}
-
 android {
     namespace = "com.example.smartalarm"
     compileSdk = 34
@@ -40,9 +32,6 @@ android {
         }
     }
 
-//    buildFeatures {
-//        viewBinding = true
-//    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -54,11 +43,7 @@ android {
         viewBinding = true
         compose = true
     }
-//    java {
-//        toolchain {
-//            languageVersion.set(JavaLanguageVersion.of(17))
-//        }
-//    }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
     }
@@ -75,11 +60,14 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
 
+//implementation("com.simplemobiletools:commons:5.34.31")
 
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     implementation("androidx.room:room-runtime:2.6.1")
+
+    implementation("com.github.iwgang:countdownview:2.1.6")
 
     implementation("androidx.work:work-runtime:2.9.0")
     implementation("com.google.guava:guava:27.0.1-android")
@@ -111,6 +99,4 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-
-
 }
