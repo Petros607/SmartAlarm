@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
 
                 override fun onAnimationEnd(arg0: Animator) {
                     // TODO Auto-generated method stub
-                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                    val intent = Intent(this@SplashActivity, GameMainActivity::class.java)
                     startActivity(intent)
                     finish()
                     //overridePendingTransition(R.anim.fade_in, R.anim.fade_out)

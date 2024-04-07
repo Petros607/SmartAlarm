@@ -795,7 +795,9 @@
             } else {
                 this.gameOverPanel.draw();
             }
-
+            //Android.sendData(this.getActualDistance(Math.ceil(this.distanceRan)));
+            //var actualDistance = this.distanceMeter.getActualDistance(Math.ceil(this.distanceRan));
+            Android.sendData(String(this.distanceMeter.getActualDistance(Math.ceil(this.distanceRan))));
             // Update the high score.
             if (this.distanceRan > this.highestScore) {
                 this.highestScore = Math.ceil(this.distanceRan);

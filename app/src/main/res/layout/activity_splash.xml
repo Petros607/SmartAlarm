@@ -5,18 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/bg"
-    tools:context="com.example.colorgame.SplashActivity">
+    android:background="#6D4949"
+    tools:context="com.example.smartalarm.colorGame.SplashActivity">
 
     <ImageView
         android:id="@+id/logo1"
         android:layout_width="match_parent"
-        android:maxWidth="300dp"
-        android:layout_margin="60dp"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
         android:layout_centerInParent="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="60dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="300dp"
+        android:scaleType="fitCenter"
         android:src="@mipmap/ic_launcher" />
 
 

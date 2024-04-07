@@ -37,7 +37,7 @@ class AlarmActivity: AppCompatActivity() {
 
         binding.buttonAlarmOff.setOnClickListener {
             lateinit var intent: Intent
-            when (Random.nextInt(0, 3)) {
+            when (Random.nextInt(2, 3)) {
                 0 -> intent = Intent(this, MathActivity::class.java)
                 1 -> intent = Intent(this, DinoActivity::class.java)
                 2 -> intent = Intent(this, GameMainActivity::class.java)

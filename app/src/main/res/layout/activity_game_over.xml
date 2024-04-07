@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
-    tools:context="com.example.colorgame.GameOverActivity">
+    android:background="@color/orange2"
+    tools:context="com.example.smartalarm.colorGame.GameOverActivity">
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
 
             android:textSize="35dp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:text="GAME" />
 
         <TextView
@@ -91,7 +91,7 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:background="@null"
-            app:srcCompat="@drawable/btn_restart_state" />
+            app:srcCompat="@drawable/ic_reset_vector" />
 
     </LinearLayout>
 

@@ -46,6 +46,22 @@
             android:launchMode="singleTask" />
 
         <service android:name=".Guide.Model.Service.AlarmService" />
+
+        <activity android:name=".colorGame.GameActivity" />
+        <activity android:name=".colorGame.GameOverActivity" />
+        <activity
+            android:name=".colorGame.SplashActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="fullSensor"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".colorGame.GameMainActivity" />
+
     </application>
 
 </manifest>

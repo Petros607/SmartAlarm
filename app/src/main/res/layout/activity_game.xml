@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="com.example.colorgame.GameActivity"
+    tools:context="com.example.smartalarm.colorGame.GameActivity"
     >
 
     <RelativeLayout
@@ -54,7 +54,7 @@
 
     </RelativeLayout>
 
-    <com.example.colorgame.widget.FlowLayout
+    <com.example.smartalarm.colorGame.widget.FlowLayout
         android:id="@+id/flowLayout"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
@@ -64,6 +64,6 @@
         android:layout_below="@+id/relativeLayout"
         android:layout_height="wrap_content">
 
-    </com.example.colorgame.widget.FlowLayout>
+    </com.example.smartalarm.colorGame.widget.FlowLayout>
 
 </RelativeLayout>
