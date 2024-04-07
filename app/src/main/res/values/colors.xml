@@ -9,4 +9,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF121212</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#2c3e50</color>
+    <color name="colorAccent">#c0392b</color>
+
+    <color name="bg">#2c3e50</color>
+    <color name="bg_white">#ecf0f1</color>
+    <color name="red">#c0392b</color>
+    <color name="green">#b6ff75</color>
 </resources>

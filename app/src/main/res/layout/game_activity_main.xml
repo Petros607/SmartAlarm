@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange2"
+    tools:context="com.example.smartalarm.colorGame.SplashActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@+id/imageView"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:text="ЧТОБЫ" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:textSize="16dp"
+            android:textColor="@color/colorAccent"
+            android:text="ВЫКЛЮЧИТЬ БУДИЛЬНИК," />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@android:color/black"
+            android:text="НАЖМИ" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnPlay"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_play_vector" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView228"
+        android:layout_width="match_parent"
+        android:layout_marginTop="350sp"
+        android:layout_height="243dp"
+        android:background="@drawable/rek"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</RelativeLayout>
