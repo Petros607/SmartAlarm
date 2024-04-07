@@ -5,9 +5,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange2"
     tools:context=".DinoActivity">
 
     <WebView
+        android:background="@color/orange2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/wv" />

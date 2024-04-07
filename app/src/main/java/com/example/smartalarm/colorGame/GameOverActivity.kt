@@ -1,5 +1,7 @@
 package com.example.smartalarm.colorGame
 
+import android.content.Intent
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
@@ -12,6 +14,7 @@ import com.example.smartalarm.R
 
 class GameOverActivity : AppCompatActivity(), View.OnClickListener {
     private var mMediaPlayer: MediaPlayer? = null
+    private var value : Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_over)
@@ -31,7 +34,12 @@ class GameOverActivity : AppCompatActivity(), View.OnClickListener {
         t10.typeface = Shared.appfontLight
         val extras = intent.extras
         if (extras != null) {
-            t8.text = extras.getInt(Constant.CURRENT_SCORE, 0).toString()
+            value = extras.getInt(Constant.CURRENT_SCORE, 0)
+            if (value >= 12) {
+                t5.text = "PASSED"
+                t5.setTextColor(Color.GREEN)
+            }
+            t8.text = value.toString()
         }
     }
 
@@ -42,6 +50,11 @@ class GameOverActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         mMediaPlayer!!.start()
+        if (value < 12) {
+            val intent = Intent(this, GameMainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         finish()
     }
 }

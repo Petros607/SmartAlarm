@@ -1,4 +1,4 @@
-package com.example.smartalarm.colorGame
+package com.example.smartalarm
 
 
 import android.animation.Animator
@@ -13,7 +13,7 @@ import com.daimajia.androidanimations.library.YoYo
 import com.example.smartalarm.R
 
 
-class SplashActivity : AppCompatActivity() {
+class SplashMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("SPLASH", "Happened")
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
 
                 override fun onAnimationEnd(arg0: Animator) {
                     // TODO Auto-generated method stub
-                    val intent = Intent(this@SplashActivity, GameMainActivity::class.java)
+                    val intent = Intent(this@SplashMainActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                     //overridePendingTransition(R.anim.fade_in, R.anim.fade_out)

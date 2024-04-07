@@ -7,6 +7,8 @@ html, body {
   margin: 0;
   width: 100%;
   height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .icon {
@@ -57,7 +59,7 @@ html, body {
 }
 
 .offline .controller {
-  background: rgba(247, 247, 247, .1);
+  background: rgba(255, 153, 0, 0.6);
   height: 100vh;
   left: 0;
   position: absolute;

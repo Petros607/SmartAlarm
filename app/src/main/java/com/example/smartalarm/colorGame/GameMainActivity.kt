@@ -37,6 +37,7 @@ class GameMainActivity : AppCompatActivity(), View.OnClickListener {
             ContextCompat.startActivity(this, intent, null)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
+        finish()
     }
 
     protected override fun onResume() {
