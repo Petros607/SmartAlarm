@@ -56,9 +56,11 @@ android {
 }
 
 dependencies {
+    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
 
 //implementation("com.simplemobiletools:commons:5.34.31")
 
@@ -71,6 +73,8 @@ dependencies {
 
     implementation("androidx.work:work-runtime:2.9.0")
     implementation("com.google.guava:guava:27.0.1-android")
+
+    implementation("com.daimajia.androidanimations:library:2.4@aar")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("com.google.code.gson:gson:2.9.0")

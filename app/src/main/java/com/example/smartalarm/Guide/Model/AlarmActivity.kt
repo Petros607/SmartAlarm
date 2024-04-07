@@ -10,11 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.smartalarm.DinoActivity
 import com.example.smartalarm.Guide.Model.Application.App
 import com.example.smartalarm.Guide.Model.BroadCastReceiver.AlarmBroadCastReceiver
 import com.example.smartalarm.Guide.Model.Service.AlarmService
 import com.example.smartalarm.MathActivity
 import com.example.smartalarm.databinding.ActivityAlarmBinding
+import kotlin.random.Random
+import com.example.smartalarm.colorGame.GameMainActivity
 
 class AlarmActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAlarmBinding
@@ -33,7 +36,12 @@ class AlarmActivity: AppCompatActivity() {
         //val ringtoneUriString = intent?.getStringExtra("ALARM")
 
         binding.buttonAlarmOff.setOnClickListener {
-            val intent = Intent(this, MathActivity::class.java)
+            lateinit var intent: Intent
+            when (Random.nextInt(0, 3)) {
+                0 -> intent = Intent(this, MathActivity::class.java)
+                1 -> intent = Intent(this, DinoActivity::class.java)
+                2 -> intent = Intent(this, GameMainActivity::class.java)
+            }
             startActivity(intent)
             binding.buttonAlarmOff.visibility = View.GONE
             binding.buttonAlarmOff2.visibility = View.VISIBLE

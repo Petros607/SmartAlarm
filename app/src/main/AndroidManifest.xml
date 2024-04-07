@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:name=".Guide.Model.Application.App"
@@ -19,8 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAlarm"
         tools:targetApi="31">
-
-
+        <activity
+            android:name=".DinoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dino"
+            android:theme="@style/Theme.SmartAlarm" />
         <activity
             android:name=".MathActivity"
             android:exported="false" />
@@ -34,13 +38,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".Guide.Model.BroadCastReceiver.AlarmBroadCastReceiver"/>
-        <activity android:name=".Guide.Model.AlarmActivity"
-            android:launchMode="singleTask"/>
-        <service android:name=".Guide.Model.Service.AlarmService"/>
 
+        <receiver android:name=".Guide.Model.BroadCastReceiver.AlarmBroadCastReceiver" />
 
+        <activity
+            android:name=".Guide.Model.AlarmActivity"
+            android:launchMode="singleTask" />
 
+        <service android:name=".Guide.Model.Service.AlarmService" />
     </application>
 
 </manifest>
