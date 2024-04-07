@@ -30,6 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".SplashMainActivity"
+            android:theme="@style/SplashTheme"
             android:configChanges="orientation"
             android:screenOrientation="fullSensor"
             android:exported="true">
