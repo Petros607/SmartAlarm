@@ -34,7 +34,7 @@ class DinoActivity : ComponentActivity() {
         fun sendData(data: String?) {
             Log.d("WebViewData", data!!)
             var value = data?.toIntOrNull()
-            if (value != null && value >= 100) {
+            if (value != null && value >= 300) {
                 (mContext as DinoActivity).finish()
             }
         }

@@ -36,7 +36,7 @@ class GameOverActivity : AppCompatActivity(), View.OnClickListener {
         if (extras != null) {
             value = extras.getInt(Constant.CURRENT_SCORE, 0)
             if (value >= 12) {
-                t5.text = "PASSED"
+                t5.text = " ПРОЙДЕНА"
                 t5.setTextColor(Color.GREEN)
             }
             t8.text = value.toString()
