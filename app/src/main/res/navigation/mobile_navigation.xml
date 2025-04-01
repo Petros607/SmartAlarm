@@ -18,17 +18,6 @@
     <!--        android:name="com.example.smartalarm.BlankFragmentAlarm"-->
 
     <fragment
-        android:id="@+id/navigationTimer"
-        android:name="com.example.smartalarm.BlankFragmentTimer"
-        android:label="@string/title_timer"
-        tools:layout="@layout/fragment_blank_timer" />
-
-    <fragment
-        android:id="@+id/navigationStopwatch"
-        android:name="com.example.smartalarm.BlankFragmentStopwatch"
-        android:label="@string/title_stopwatch"
-        tools:layout="@layout/fragment_blank_stopwatch" />
-    <fragment
         android:id="@+id/navigationSettings"
         android:name="com.example.smartalarm.BlankFragmentSettings"
         android:label="@string/title_settings"
